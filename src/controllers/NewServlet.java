@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Task;
+
 
 /**
  * Servlet implementation class NewServlet
@@ -29,7 +31,14 @@ public class NewServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/task/new.jsp");
+
+    request.setAttribute("_token", request.getSession().getId());
+
+    request.setAttribute("task", new Task());
+
+    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/task/new.jsp");
+
+
         rd.forward(request, response);
      }
 }
